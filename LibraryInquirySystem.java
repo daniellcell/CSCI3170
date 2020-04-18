@@ -518,7 +518,7 @@ public class LibraryInquirySystem {
             }
             pstmt.close();
             Date today = new java.sql.Date(new java.util.Date().getTime());
-            pstmt = conn.prepareStatement("INSERT INTO Borrow VALUES (?, ?, ?, ?, NULL)");
+            pstmt = conn.prepareStatement("INSERT INTO borrow VALUES (?, ?, ?, ?, NULL)");
             pstmt.setString(1, user);
             pstmt.setString(2, callnum);
             pstmt.setInt(3, copynum);
@@ -541,7 +541,7 @@ public class LibraryInquirySystem {
         String callnum = getStrInput(in, "Enter the Call Number: ");
         int copynum = getIntInput(in, "Enter the Copy Number: ", new int[]{1, 10});
         try{
-            PreparedStatement pstmt = conn.prepareStatement("SELECT checkout FROM Borrow WHERE libuid = ? AND callnum = ? AND copynum = ? AND returndate IS NULL");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT checkout FROM borrow WHERE libuid = ? AND callnum = ? AND copynum = ? AND returndate IS NULL");
             pstmt.setString(1, user);
             pstmt.setString(2, callnum);
             pstmt.setInt(3, copynum);
@@ -553,7 +553,7 @@ public class LibraryInquirySystem {
             Date checkOut = rs.getDate(1);
             pstmt.close();
             Date today = new java.sql.Date(new java.util.Date().getTime());
-            pstmt = conn.prepareStatement("UPDATE Borrow SET returndate = ? WHERE libuid = ? AND callnum = ? AND copynum = ? AND checkout = ?");
+            pstmt = conn.prepareStatement("UPDATE borrow SET returndate = ? WHERE libuid = ? AND callnum = ? AND copynum = ? AND checkout = ?");
             pstmt.setDate(1, today);
             pstmt.setString(2, user);
             pstmt.setString(3, callnum);
